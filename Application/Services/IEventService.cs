@@ -1,10 +1,11 @@
 ﻿using EventsMonitoring.Models.Entities;
+using Microsoft.AspNetCore.Http;
 
 namespace EventsMonitoring.Models.Services
 {
     public interface IEventService
     {
-        Task<Event> CreateEvent(Event request, Context db);
-        Task UploadImageAsync(IFormFile imageFile, Guid eventId, Context db);
+        Event CreateEvent(Event request);
+        Task UploadImageAsync(IFormFile imageFile);
     }
 }

@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using EventsMonitoring.Models.UseCases;
 using EventsMonitoring.Models.Entities;
-using EventsMonitoring.Models.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
+using Infrastructure.Repositories;
 
 namespace EventsMonitoring.Controllers
 {
@@ -17,10 +16,7 @@ namespace EventsMonitoring.Controllers
         public IActionResult GetUserById(Guid id, Context db)
         {
             var user = mapper.Map<UserDto>(repo.GetById(id, db));
-            if (user == null)
-            {
-                return NotFound();
-            }
+ 
             return Ok(user);
         }
 
@@ -29,10 +25,7 @@ namespace EventsMonitoring.Controllers
         public IActionResult GetUserByName(string name, Context db)
         {
             var user = mapper.Map<UserDto>(repo.GetByName(name, db));
-            if (user == null)
-            {
-                return NotFound();
-            }
+
             return Ok(user);
         }
 
@@ -68,7 +61,7 @@ namespace EventsMonitoring.Controllers
         public async Task<IActionResult> DeleteUser(User user, Context db)
         {
             await repo.DeleteAsync(user, db);
-            if(user == null) { return NotFound(); }
+
             return Ok(user);
         }
     }

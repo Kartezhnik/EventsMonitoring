@@ -18,13 +18,10 @@ namespace EventsMonitoring
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Events Monitoring API", Version = "v1" });
             });
-
             builder.Services.AddDbContext<Context>(options => 
                 options.UseMySql("Server=localhost;Database=applicationdb;User=root;Password=12345;", 
                 new MySqlServerVersion(new Version(8, 0, 34, 0))));
-
             builder.Services.AddAutoMapper(typeof(MappingProfile));
-
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
@@ -39,21 +36,18 @@ namespace EventsMonitoring
                 };
             });
             builder.Services.AddAuthorization();
-
             builder.Services.AddControllers();
 
             WebApplication app = builder.Build();
 
             app.UseAuthentication();
             app.UseAuthorization();
-
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Events Monitoring API V1");
                 c.RoutePrefix = string.Empty; 
             });
-
             app.UseDefaultFiles();
             app.UseStaticFiles();
 

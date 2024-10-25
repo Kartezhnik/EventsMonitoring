@@ -1,11 +1,8 @@
-﻿using EventsMonitoring.Models.Services;
-
-namespace EventsMonitoring.Models.Entities
+﻿namespace EventsMonitoring.Models.Entities
 {
     public class Tokens
     {
-        public string Token { get; set; } = TokenService.GenerateRefrashToken();
-
+        public string Token { get; set; }
         public Guid UserId { get; set; }
         public User? User { get; set; } 
     }

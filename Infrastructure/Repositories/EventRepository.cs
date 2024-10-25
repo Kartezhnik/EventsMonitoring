@@ -1,7 +1,8 @@
 ﻿using EventsMonitoring.Models.Entities;
 using Microsoft.Extensions.Logging;
+using EventsMonitoring;
 
-namespace EventsMonitoring.Models.Repositories
+namespace Infrastructure.Repositories
 {
     public class EventRepository : IRepository<Event>
     {
@@ -21,10 +22,6 @@ namespace EventsMonitoring.Models.Repositories
         public async Task UpdateAsync(Event entity, Context db)
         {
             var existingEvent = await db.Events.FindAsync(entity.Id);
-            if (existingEvent == null)
-            {
-                throw new KeyNotFoundException($"Событие с ID {entity.Id} не найдено");
-            }
 
             existingEvent.Name = entity.Name;
             existingEvent.Description = entity.Description;
@@ -35,13 +32,11 @@ namespace EventsMonitoring.Models.Repositories
 
             await db.SaveChangesAsync();
         }
-        public async Task DeleteAsync(Event entity, Context db)
+        public Task DeleteAsync(Event entity, Context db)
         {
-            if (entity != null)
-            {
-                db.Remove(entity);
-            }
-            await db.SaveChangesAsync();
+            db.Remove(entity);
+
+            return Task.CompletedTask;
         }
         public async Task SaveAsync(Event entity, Context db)
         {

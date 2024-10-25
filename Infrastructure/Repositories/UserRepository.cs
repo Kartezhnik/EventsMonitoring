@@ -1,11 +1,8 @@
 ﻿using EventsMonitoring.Models.Entities;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.Extensions.Logging;
-using NuGet.Protocol;
 using System.Data.Entity;
-using EventsMonitoring.Models.Services;
+using EventsMonitoring;
 
-namespace EventsMonitoring.Models.Repositories
+namespace Infrastructure.Repositories
 {
     public class UserRepository : IRepository<User>
     {
@@ -25,17 +22,12 @@ namespace EventsMonitoring.Models.Repositories
         public async Task UpdateAsync(User entity, Context db)
         {
             if (entity != null)
-            {
-                db.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-            }
+            db.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             await db.SaveChangesAsync();
         }
         public async Task DeleteAsync(User entity, Context db)
         {
-            if(entity != null)
-            {
-                db.Remove(entity);
-            }
+            db.Remove(entity);
             await db.SaveChangesAsync();
         }
         public async Task SaveAsync(User entity, Context db)
@@ -74,15 +66,8 @@ namespace EventsMonitoring.Models.Repositories
             Tokens? token = new Tokens();
             User user = GetById(id, db); 
             token = await db.Tokens.FindAsync(user.Id);
-            
-            if (token != null)
-            {
-                return token;
-            }
-            else
-            {
-                throw new UnauthorizedAccessException();
-            }           
+
+            return token;
         }
     }
 }

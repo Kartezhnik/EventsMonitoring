@@ -1,6 +1,4 @@
-﻿using Microsoft.CodeAnalysis.Diagnostics;
-
-namespace EventsMonitoring.Models.Services
+﻿namespace EventsMonitoring.Models.Services
 {
     public interface ITokenService
     {

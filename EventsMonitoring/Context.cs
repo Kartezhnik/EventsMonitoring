@@ -17,7 +17,6 @@ namespace EventsMonitoring
             modelBuilder.Entity<User>().HasOne(u => u.Token).WithOne(r => r.User).HasForeignKey<Tokens>(r => r.UserId);
         }
         
-
         public DbSet<Event> Events { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Tokens> Tokens { get; set; } = null!;

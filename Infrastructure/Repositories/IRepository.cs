@@ -1,6 +1,6 @@
-﻿using EventsMonitoring.Models.Entities;
+﻿using EventsMonitoring;
 
-namespace EventsMonitoring.Models.Repositories
+namespace Infrastructure.Repositories
 {
     public interface IRepository<T> where T : class
     {
