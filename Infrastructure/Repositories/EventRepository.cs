@@ -21,15 +21,7 @@ namespace Infrastructure.Repositories
         }
         public async Task UpdateAsync(Event entity, Context db)
         {
-            var existingEvent = await db.Events.FindAsync(entity.Id);
-
-            existingEvent.Name = entity.Name;
-            existingEvent.Description = entity.Description;
-            existingEvent.Type = entity.Type;
-            existingEvent.PlaceOfEvent = entity.PlaceOfEvent;
-            existingEvent.DateOfEvent = entity.DateOfEvent;
-            existingEvent.ImageUrl = entity.ImageUrl;
-
+            db.Events.Update(entity);
             await db.SaveChangesAsync();
         }
         public Task DeleteAsync(Event entity, Context db)

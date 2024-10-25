@@ -18,7 +18,7 @@ namespace Application.UseCases
             @event.Type = request.Type;
             @event.PlaceOfEvent = request.PlaceOfEvent;
             @event.DateOfEvent = request.DateOfEvent;
-            @event.ImageUrl = request.ImageUrl;
+            @event.ImageFile = request.ImageFile;
 
             return @event;
         }

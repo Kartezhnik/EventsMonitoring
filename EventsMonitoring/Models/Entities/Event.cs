@@ -8,7 +8,7 @@
         public string Type { get; set; }
         public DateTime DateOfEvent { get; set; }
         public string PlaceOfEvent { get; set; }
-        public string ImageUrl { get; set; }
+        public IFormFile? ImageFile { get; set; }
 
         public List<User> Users { get; set; } = new();
     }

@@ -11,6 +11,7 @@ namespace EventsMonitoring.Controllers
     public class EventController : Controller
     {
         IRepository<Event> repo;
+        CreateEventUseCase createEventUseCase;
 
         [Authorize]
         [HttpGet("event/{eventId}")]
@@ -34,33 +35,32 @@ namespace EventsMonitoring.Controllers
         [HttpPost("event/create")]
         public async Task<IActionResult> CreateEvent(Event request, Context db)
         {
-            await repo.CreateAsync(request, db);
+            await repo.CreateAsync(createEventUseCase.CreateEvent(request), db);
 
             return Ok();
         }
 
         [Authorize]
         [HttpPost("event/uploadImage")]
-        public async Task<IActionResult> UploadImage(IFormFile imageFile, Event @event)
+        public async Task<IActionResult> UploadImage(Event request)
         {
-            UploadImageUseCase uploadImageUseCase;
-            await uploadImageUseCase.UploadImageAsync(imageFile, @event);
+            await UploadImageUseCase.UploadImageAsync(request);
 
             return Ok();
         }
         [Authorize]
         [HttpPost("event/update")]
-        public async Task<IActionResult> UpdateEvent(Event entity, Context db)
+        public async Task<IActionResult> UpdateEvent(Event request, Context db)
         {
-            await repo.UpdateAsync(entity, db);
+            await repo.UpdateAsync(request, db);
 
             return Ok();
         }
         [Authorize]
         [HttpDelete("event/delete")]
-        public async Task<IActionResult> DeleteEvent(Event entity, Context db)
+        public async Task<IActionResult> DeleteEvent(Event request, Context db)
         {
-            await repo.DeleteAsync(entity, db);
+            await repo.DeleteAsync(request, db);
 
             return Ok();
         }

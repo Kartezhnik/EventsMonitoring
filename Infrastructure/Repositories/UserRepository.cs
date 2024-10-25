@@ -21,8 +21,7 @@ namespace Infrastructure.Repositories
         }
         public async Task UpdateAsync(User entity, Context db)
         {
-            if (entity != null)
-            db.Entry(entity).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            db.Users.Update(entity);
             await db.SaveChangesAsync();
         }
         public async Task DeleteAsync(User entity, Context db)
