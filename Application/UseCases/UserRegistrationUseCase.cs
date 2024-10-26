@@ -1,5 +1,6 @@
 ﻿using EventsMonitoring.Models.Entities;
 using EventsMonitoring.Models.Services;
+using Microsoft.IdentityModel.SecurityTokenService;
 
 namespace EventsMonitoring.Models.UseCases
 {
@@ -7,6 +8,8 @@ namespace EventsMonitoring.Models.UseCases
     {
         public User Register(User request)
         {
+            if (request == null) throw new BadRequestException(nameof(request));
+
             User user = new User();
             user.Id = new Guid();
             user.Name = request.Name;

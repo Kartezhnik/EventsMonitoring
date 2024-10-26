@@ -1,4 +1,6 @@
 ﻿using EventsMonitoring.Models.Entities;
+using Google.Rpc;
+using Microsoft.IdentityModel.SecurityTokenService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +13,8 @@ namespace Application.UseCases
     {
         public Event CreateEvent(Event request)
         {
+            if (request == null) throw new BadRequestException(nameof(request));
+
             Event @event = new Event();
             @event.Id = Guid.NewGuid();
             @event.Name = request.Name;
@@ -21,6 +25,7 @@ namespace Application.UseCases
             @event.ImageFile = request.ImageFile;
 
             return @event;
+
         }
     }
 }

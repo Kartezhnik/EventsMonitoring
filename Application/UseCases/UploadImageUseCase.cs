@@ -1,5 +1,6 @@
 ﻿using EventsMonitoring.Models.Entities;
 using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.SecurityTokenService;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Application.UseCases
         public static async Task UploadImageAsync(Event @event)
         {
             if (@event.ImageFile == null || @event.ImageFile.Length == 0)
-                throw new ArgumentException("Изображение не загружено");
+                throw new BadRequestException("Изображение не загружено");
 
             var uploadsDirectory = Path.Combine("uploads");
 

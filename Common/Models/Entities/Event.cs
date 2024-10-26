@@ -1,4 +1,6 @@
-﻿namespace EventsMonitoring.Models.Entities
+﻿using Microsoft.AspNetCore.Http;
+
+namespace EventsMonitoring.Models.Entities
 {
     public class Event
     {

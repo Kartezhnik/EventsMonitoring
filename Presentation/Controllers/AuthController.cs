@@ -1,40 +1,46 @@
-﻿using EventsMonitoring.Models.Entities;
+﻿using AutoMapper;
+using EventsMonitoring;
+using EventsMonitoring.Models.Entities;
 using EventsMonitoring.Models.Services;
 using EventsMonitoring.Models.UseCases;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EventsMonitoring.Controllers
+namespace Presentation.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
         private readonly UserRegistrationUseCase userRegistrationUseCase;
         private readonly UserAuthorizationUseCase userAuthorizationUseCase;
-        private IRepository<User> repo;  
+        private IRepository<User> repo;
+        IMapper mapper;
+        ITokenService tokenService;
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterUser([FromBody] User request, Context db)
+        public async Task<IActionResult> RegisterUser([FromBody] UserDto userDto, [FromServices] Context db)
         {
-            await repo.CreateAsync(userRegistrationUseCase.Register(request), db);
+            var user = mapper.Map<User>(userDto);
+            await repo.CreateAsync(user, db);
 
             return Ok();
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] User request, string name, string password, Context db)
+        public IActionResult Login([FromBody] UserDto request, [FromServices] Context db)
         {
-            string token = userAuthorizationUseCase.Authorizate(request, name, password);
+            var token = userAuthorizationUseCase.Authorizate(request, db);
 
             return Ok(new { token });
         }
 
         [HttpPost("refresh")]
-        public async Task<IActionResult> RefreshToken([FromBody] Guid id, Context db)
+        public async Task<IActionResult> RefreshToken([FromBody] Guid id, [FromServices] Context db)
         {
-            ITokenService tokenService = new TokenService();
+            var user = repo.GetById(id, db);
+            string token = tokenService.GenerateJwtToken(user.Name);
 
-            string name = repo.GetById(id, db).Name;
-            string token = tokenService.GenerateJwtToken(name);
             return Ok(new { token });
         }
     }

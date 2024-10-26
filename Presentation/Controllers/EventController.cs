@@ -1,21 +1,22 @@
 ﻿using EventsMonitoring.Models.Entities;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Infrastructure.Repositories;
 using Application.UseCases;
-using EventsMonitoring.Models.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
+using EventsMonitoring;
 
-namespace EventsMonitoring.Controllers
+namespace Presentation.Controllers 
 {
-    public class EventController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class EventController : ControllerBase
     {
         IRepository<Event> repo;
         CreateEventUseCase createEventUseCase;
 
         [Authorize]
         [HttpGet("event/{eventId}")]
-        public IActionResult GetEventById(Guid id, Context db)
+        public IActionResult GetEventById(Guid id, [FromServices] Context db)
         {
             var @event = repo.GetById(id, db);
 
@@ -24,7 +25,7 @@ namespace EventsMonitoring.Controllers
 
         [Authorize]
         [HttpGet("event/{eventName}")]
-        public IActionResult GetUserByName(string name, Context db)
+        public IActionResult GetUserByName(string name, [FromServices] Context db)
         {
             var @event = repo.GetByName(name, db);
 
@@ -33,7 +34,7 @@ namespace EventsMonitoring.Controllers
 
         [Authorize]
         [HttpPost("event/create")]
-        public async Task<IActionResult> CreateEvent(Event request, Context db)
+        public async Task<IActionResult> CreateEvent(Event request, [FromServices] Context db)
         {
             await repo.CreateAsync(createEventUseCase.CreateEvent(request), db);
 
@@ -50,7 +51,7 @@ namespace EventsMonitoring.Controllers
         }
         [Authorize]
         [HttpPost("event/update")]
-        public async Task<IActionResult> UpdateEvent(Event request, Context db)
+        public async Task<IActionResult> UpdateEvent(Event request, [FromServices] Context db)
         {
             await repo.UpdateAsync(request, db);
 
@@ -58,7 +59,7 @@ namespace EventsMonitoring.Controllers
         }
         [Authorize]
         [HttpDelete("event/delete")]
-        public async Task<IActionResult> DeleteEvent(Event request, Context db)
+        public async Task<IActionResult> DeleteEvent(Event request, [FromServices] Context db)
         {
             await repo.DeleteAsync(request, db);
 

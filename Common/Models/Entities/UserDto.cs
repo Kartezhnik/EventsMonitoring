@@ -6,6 +6,7 @@ namespace EventsMonitoring.Models.Entities
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string Password { get; set; }    
 
         public int? EventInfoKey { get; set; }
         [ForeignKey("EventInfoKey")]

@@ -4,15 +4,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "EventsMonitoring\Core.csproj", "{8C363425-6ECA-41A9-8C8E-D3B5B004CFD1}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{E41C4E4A-4E02-4471-ACA8-C640BB30B772}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{B6792980-D2CF-4B37-A266-E768E8FAA769}"
 	ProjectSection(ProjectDependencies) = postProject
-		{8C363425-6ECA-41A9-8C8E-D3B5B004CFD1} = {8C363425-6ECA-41A9-8C8E-D3B5B004CFD1}
+		{B6792980-D2CF-4B37-A266-E768E8FAA769} = {B6792980-D2CF-4B37-A266-E768E8FAA769}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{E8DB23C5-E9ED-4CF4-919A-2CA0CDD51871}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{E41C4E4A-4E02-4471-ACA8-C640BB30B772}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B6792980-D2CF-4B37-A266-E768E8FAA769} = {B6792980-D2CF-4B37-A266-E768E8FAA769}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{B6792980-D2CF-4B37-A266-E768E8FAA769}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Presentation", "Presentation\Presentation.csproj", "{E8DB23C5-E9ED-4CF4-919A-2CA0CDD51871}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B6792980-D2CF-4B37-A266-E768E8FAA769} = {B6792980-D2CF-4B37-A266-E768E8FAA769}
+		{E41C4E4A-4E02-4471-ACA8-C640BB30B772} = {E41C4E4A-4E02-4471-ACA8-C640BB30B772}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{34442706-DB93-4910-878E-C2804CED36B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +45,10 @@ Global
 		{E8DB23C5-E9ED-4CF4-919A-2CA0CDD51871}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8DB23C5-E9ED-4CF4-919A-2CA0CDD51871}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8DB23C5-E9ED-4CF4-919A-2CA0CDD51871}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34442706-DB93-4910-878E-C2804CED36B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34442706-DB93-4910-878E-C2804CED36B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34442706-DB93-4910-878E-C2804CED36B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34442706-DB93-4910-878E-C2804CED36B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-
+using Presentation.Controllers;
 
 namespace EventsMonitoring
 {
@@ -36,12 +36,21 @@ namespace EventsMonitoring
                 };
             });
             builder.Services.AddAuthorization();
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddApplicationPart(typeof(UserController).Assembly)
+                .AddApplicationPart(typeof(AuthController).Assembly)
+                .AddApplicationPart(typeof(EventController).Assembly); 
 
             WebApplication app = builder.Build();
 
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
