@@ -1,6 +1,5 @@
-﻿using EventsMonitoring.Models.Entities;
-using Microsoft.Extensions.Logging;
-using EventsMonitoring;
+﻿using Common.Models.Entities;
+using Common;
 
 namespace Infrastructure.Repositories
 {

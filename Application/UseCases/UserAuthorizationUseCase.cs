@@ -1,10 +1,11 @@
-﻿using EventsMonitoring.Models.Entities;
-using EventsMonitoring.Models.Services;
+﻿using Common;
+using Common.Models.Entities;
+using Application.Services;
 using Infrastructure.Repositories;
 using Microsoft.IdentityModel.SecurityTokenService;
 
 
-namespace EventsMonitoring.Models.UseCases
+namespace Application.UseCases
 {
     public class UserAuthorizationUseCase
     {

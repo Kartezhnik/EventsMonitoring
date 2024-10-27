@@ -1,7 +1,7 @@
 ﻿using Microsoft.IdentityModel.Tokens;
 using System.Text;
 
-namespace EventsMonitoring
+namespace Common
 {
     public class AuthOptions
     {

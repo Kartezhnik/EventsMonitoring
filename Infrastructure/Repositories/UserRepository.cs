@@ -1,5 +1,5 @@
-﻿using EventsMonitoring.Models.Entities;
-using EventsMonitoring;
+﻿using Common.Models.Entities;
+using Common;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories

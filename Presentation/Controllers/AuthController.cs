@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using EventsMonitoring;
-using EventsMonitoring.Models.Entities;
-using EventsMonitoring.Models.Services;
-using EventsMonitoring.Models.UseCases;
+using Common;
+using Common.Models.Entities;
+using Application.Services;
+using Application.UseCases;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,7 +36,7 @@ namespace Presentation.Controllers
         }
 
         [HttpPost("refresh")]
-        public async Task<IActionResult> RefreshToken([FromBody] Guid id, [FromServices] Context db)
+        public async Task<IActionResult> RefreshToken([FromBody] Guid id, [FromServices]  Context db)
         {
             var user = repo.GetById(id, db);
             string token = tokenService.GenerateJwtToken(user.Name);

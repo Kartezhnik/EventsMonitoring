@@ -1,7 +1,7 @@
-﻿using EventsMonitoring.Models.Entities;
+﻿using Common.Models.Entities;
 using AutoMapper;
 
-namespace EventsMonitoring.Models.Mappers
+namespace Common.Models.Mappers
 {
     public class MappingProfile : Profile
     {

@@ -1,4 +1,4 @@
-﻿using EventsMonitoring;
+﻿using Common;
 
 namespace Infrastructure.Repositories
 {

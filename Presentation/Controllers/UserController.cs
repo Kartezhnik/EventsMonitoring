@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using EventsMonitoring.Models.Entities;
+using Common.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using Infrastructure.Repositories;
-using EventsMonitoring;
+using Common;
 
 namespace Presentation.Controllers
 {

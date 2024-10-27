@@ -1,8 +1,7 @@
-﻿using EventsMonitoring.Models.Entities;
-using EventsMonitoring.Models.Services;
+﻿using Common.Models.Entities;
 using Microsoft.IdentityModel.SecurityTokenService;
 
-namespace EventsMonitoring.Models.UseCases
+namespace Application.UseCases
 {
     public class UserRegistrationUseCase
     {

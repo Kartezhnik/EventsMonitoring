@@ -1,4 +1,5 @@
-using EventsMonitoring.Models.Mappers;
+using Common;
+using Common.Models.Mappers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;

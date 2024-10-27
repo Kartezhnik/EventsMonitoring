@@ -1,4 +1,4 @@
-﻿namespace EventsMonitoring.Models.Services
+﻿namespace Application.Services
 {
     public interface ITokenService
     {

@@ -1,7 +1,7 @@
-﻿using EventsMonitoring.Models.Entities;
+﻿using Common.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace EventsMonitoring
+namespace Common
 {
     public class Context : DbContext
     {
