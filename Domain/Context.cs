@@ -6,18 +6,18 @@ namespace Domain
 {
     public class Context : DbContext
     {
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration configuration;
 
-        public Context(DbContextOptions<Context> options, IConfiguration configuration) : base(options)
+        public Context(DbContextOptions<Context> options, IConfiguration _configuration) : base(options)
         {
-            _configuration = configuration;
+            configuration = _configuration;
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-                var connectionString = _configuration.GetConnectionString("DefaultConnection");
+                var connectionString = configuration.GetConnectionString("DefaultConnection");
                 optionsBuilder.UseSqlServer(connectionString);
             }
         }
