@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Domain;
 using Domain.Entities;
 
 namespace Infrastructure.Repositories

@@ -1,4 +1,4 @@
-﻿using Common;
+﻿using Domain;
 using Microsoft.EntityFrameworkCore;
 using Domain.Entities;
 using Domain.Abstractions;
@@ -58,19 +58,5 @@ namespace Infrastructure.Repositories
 
             return users;
         }
-        /*
-        public async Task AddTokenAsync(User user, string token)
-        {
-            token.UserId = user.Id;
-            await db.Tokens.AddAsync(token);
-        }
-        public async Task<Tokens> GetTokenAsync(User user)
-        {
-            Tokens token = new Tokens();
-            token = await db.Tokens.FindAsync(user.Id);
-
-            return token;
-        }
-        */
     }
 }

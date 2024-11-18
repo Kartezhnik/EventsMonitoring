@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Application.UseCases;
 using Microsoft.AspNetCore.Authorization;
-using Common;
-using Domain.Entities;
 using Domain.Entities;
 using AutoMapper;
 
@@ -12,15 +10,10 @@ namespace Presentation.Controllers
     [Route("api/[controller]")]
     public class EventController : ControllerBase
     {
-        Context db;
         EventRepositoryUseCase eventRepositoryUseCase;
         CreateEventUseCase createEventUseCase;
         IMapper mapper;
         
-        public EventController(Context _db)
-        {
-            db = _db;
-        }
 
         [Authorize]
         [HttpGet("event/{eventId}")]

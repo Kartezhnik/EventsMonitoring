@@ -1,8 +1,7 @@
 using Application;
 using Application.Services;
 using Application.UseCases;
-using Common;
-using Common.Mappers;
+using Domain.Mappers;
 using Domain;
 using Domain.Abstractions;
 using Infrastructure;
@@ -13,6 +12,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Presentation.Controllers;
 using Presentation.Middleware;
+using Infrastructure.Services;
 
 namespace EventsMonitoring
 {

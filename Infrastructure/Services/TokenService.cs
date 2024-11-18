@@ -1,12 +1,11 @@
-﻿using Common;
+﻿using Domain;
 using Domain.Abstractions;
-using Domain.Entities;
 using Microsoft.IdentityModel.Tokens;
 using System.Collections.Concurrent;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
-namespace Application.Services
+namespace Infrastructure.Services
 {
     public class TokenService : ITokenService
     {

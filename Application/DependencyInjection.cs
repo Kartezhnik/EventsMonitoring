@@ -1,10 +1,9 @@
 ﻿using MediatR;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using System.Net;
 using Application.Services;
 using Domain.Abstractions;
-using Common;
+using Domain;
 
 namespace Application
 {
