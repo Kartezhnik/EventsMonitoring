@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using AutoMapper;
 using Domain.Entities;
 using Application.UseCases;
+using Domain;
 
 namespace Presentation.Controllers
 {
@@ -12,6 +13,14 @@ namespace Presentation.Controllers
     {
         IMapper mapper;
         UserRepositoryUseCase userRepositoryUseCase;
+        Context context;
+
+        public UserController(IMapper _mapper, UserRepositoryUseCase _userRepositoryUseCase, Context _context)
+        {
+            mapper = _mapper;
+            userRepositoryUseCase = _userRepositoryUseCase;
+            context = _context;
+        }
 
         [Authorize]
         [HttpGet("user/{userId}")]

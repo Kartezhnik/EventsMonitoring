@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Domain.Entities;
 using Domain.Abstractions;
-
+using Domain;
 
 namespace Presentation.Controllers
 {
@@ -12,10 +12,11 @@ namespace Presentation.Controllers
     {
         UserRepositoryUseCase userRepositoryUseCase;
         IAuthService authService;
-      
-        public AuthController(IAuthService _authService)
+        Context context;
+        public AuthController(IAuthService _authService, Context _context)
         {
             authService = _authService;
+            context = _context;
         }
 
         [HttpPost("register")]

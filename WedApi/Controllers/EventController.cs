@@ -3,6 +3,7 @@ using Application.UseCases;
 using Microsoft.AspNetCore.Authorization;
 using Domain.Entities;
 using AutoMapper;
+using Domain;
 
 namespace Presentation.Controllers
 {
@@ -13,7 +14,14 @@ namespace Presentation.Controllers
         EventRepositoryUseCase eventRepositoryUseCase;
         CreateEventUseCase createEventUseCase;
         IMapper mapper;
+        Context context;
         
+        public EventController(Context _context, IMapper _mapper, EventRepositoryUseCase _eventRepositoryUseCase)
+        {
+            context = _context;
+            mapper = _mapper;
+            eventRepositoryUseCase = _eventRepositoryUseCase;
+        }
 
         [Authorize]
         [HttpGet("event/{eventId}")]

@@ -19,6 +19,7 @@ namespace Domain
             {
                 var connectionString = configuration.GetConnectionString("DefaultConnection");
                 optionsBuilder.UseSqlServer(connectionString);
+                Console.WriteLine($"Connection String: {connectionString}");
             }
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
