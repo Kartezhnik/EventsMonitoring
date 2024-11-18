@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Common.Models.Entities
+namespace Domain.Entities
 {
     public class User
     {
@@ -8,13 +8,11 @@ namespace Common.Models.Entities
         public string Name { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
-        public DateOnly BirthdayDate { get; set; }
-        public DateTime RegistrationDate { get; set; }      
-
-        public Guid EventInfoKey { get; set; }
+        public DateTime BirthdayDate { get; set; }
+        public DateTime RegistrationDate { get; set; }
+        
+        public Guid? EventInfoKey { get; set; }
         [ForeignKey("EventInfoKey")]
         public Event? Event { get; set; }
-
-        public Tokens? Token { get; set; }
     }
 }

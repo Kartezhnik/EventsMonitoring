@@ -1,11 +1,11 @@
-﻿using Common.Models.Entities;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Infrastructure.Repositories;
 using Application.UseCases;
 using Microsoft.AspNetCore.Authorization;
 using Common;
+using Common.Entities;
 
-namespace Presentation.Controllers 
+namespace Presentation.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

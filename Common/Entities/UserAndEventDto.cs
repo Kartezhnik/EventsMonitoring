@@ -1,4 +1,4 @@
-﻿namespace Common.Models.Entities
+﻿namespace Domain.Entities
 {
     public class UserAndEventDto
     {

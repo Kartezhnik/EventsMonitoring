@@ -1,25 +1,33 @@
-﻿using Common.Models.Entities;
+﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace Common
 {
     public class Context : DbContext
     {
-        public Context(DbContextOptions<Context> options)
-        : base(options)
+        private readonly IConfiguration _configuration;
+
+        public Context(DbContextOptions<Context> options, IConfiguration configuration) : base(options)
         {
-            Database.EnsureCreated();
+            _configuration = configuration;
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder) 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                var connectionString = _configuration.GetConnectionString("DefaultConnection");
+                optionsBuilder.UseSqlServer(connectionString);
+            }
+        }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().HasOne(u => u.Event).WithMany(e => e.Users).HasForeignKey(u => u.EventInfoKey);
-            modelBuilder.Entity<User>().HasOne(u => u.Token).WithOne(r => r.User).HasForeignKey<Tokens>(r => r.UserId);
         }
-        
+
         public DbSet<Event> Events { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
-        public DbSet<Tokens> Tokens { get; set; } = null!;
-
     }
 }
+

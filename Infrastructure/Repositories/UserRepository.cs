@@ -1,70 +1,76 @@
-﻿using Common.Models.Entities;
-using Common;
+﻿using Common;
 using Microsoft.EntityFrameworkCore;
+using Domain.Entities;
+using Domain.Abstractions;
 
 namespace Infrastructure.Repositories
 {
-    public class UserRepository : IRepository<User>
+    public class UserRepository : IUserRepository
     {
-        public User GetById(Guid id, Context db)
+        Context db;
+        public UserRepository(Context _db) 
         {
-            return db.Users.First(x => x.Id == id);
+             db = _db;
         }
-        public User GetByName(string name, Context db)
+        public User GetById(Guid id)
         {
-            return db.Users.First(x => x.Name == name);
+            return db.Users.FirstOrDefault(x => x.Id == id);
         }
-        public async Task CreateAsync(User entity, Context db)
+        public User GetByName(string name)
         {
-            await db.Users.AddAsync(entity);
-            await db.SaveChangesAsync();
+            return db.Users.FirstOrDefault(x => x.Name == name);
         }
-        public async Task UpdateAsync(User entity, Context db)
+        public async Task CreateAsync(User user)
         {
-            db.Users.Update(entity);
-            await db.SaveChangesAsync();
+            await db.Users.AddAsync(user);
         }
-        public async Task DeleteAsync(User entity, Context db)
+        public Task Update(User user)
         {
-            db.Remove(entity);
-            await db.SaveChangesAsync();
+            db.Users.Update(user);
+            return Task.CompletedTask;
         }
-        public async Task SaveAsync(User entity, Context db)
+        public Task Delete(User user)
         {
-            await db.SaveChangesAsync();
+            db.Remove(user);
+            return Task.CompletedTask;
         }
-
-        public async Task AddUserInEventAsync(Event @event, User entity, Context db)
+        public async Task SaveAsync()
         {
-            entity.EventInfoKey = @event.Id;
-            await db.Users.AddAsync(entity);
             await db.SaveChangesAsync();
         }
 
-        public async Task DeleteUserFromEventAsync(Event @event, User entity, Context db)
+        public async Task AddUserInEventAsync(Event @event, User user)
         {
-            entity.EventInfoKey = @event.Id;
-            db.Remove(entity);
-            await db.SaveChangesAsync();
+            user.EventInfoKey = @event.Id;
+            await db.Users.AddAsync(user);
         }
-        public async Task<List<User>> GetUsersByEventAsync(Event @event, Context db)
+
+        public Task DeleteUserFromEventAsync(Event @event, User user)
+        {
+            user.EventInfoKey = @event.Id;
+            db.Users.Remove(user);
+
+            return Task.CompletedTask;
+        }
+        public async Task<List<User>> GetUsersByEventAsync(Event @event)
         {
             List<User> users = await db.Users.Where(user => user.EventInfoKey == @event.Id).ToListAsync();
 
             return users;
         }
-        public async Task AddTokenAsync(User user, Tokens token, Context db)
+        /*
+        public async Task AddTokenAsync(User user, string token)
         {
             token.UserId = user.Id;
             await db.Tokens.AddAsync(token);
-            await db.SaveChangesAsync();
         }
-        public async Task<Tokens> GetTokenAsync(User user, Context db)
+        public async Task<Tokens> GetTokenAsync(User user)
         {
-            Tokens? token = new Tokens();
+            Tokens token = new Tokens();
             token = await db.Tokens.FindAsync(user.Id);
 
             return token;
         }
+        */
     }
 }

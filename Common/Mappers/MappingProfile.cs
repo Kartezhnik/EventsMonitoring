@@ -1,7 +1,7 @@
-﻿using Common.Models.Entities;
-using AutoMapper;
+﻿using AutoMapper;
+using Domain.Entities;
 
-namespace Common.Models.Mappers
+namespace Common.Mappers
 {
     public class MappingProfile : Profile
     {

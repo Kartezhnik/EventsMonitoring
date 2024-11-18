@@ -1,35 +1,38 @@
-﻿using Common.Models.Entities;
-using Common;
+﻿using Common;
+using Domain.Entities;
 
 namespace Infrastructure.Repositories
 {
-    public class EventRepository : IRepository<Event>
+    public class EventRepository 
     {
-        public Event GetById(Guid id, Context db)
+        Context db;
+        private EventRepository(Context _db) 
+        {
+            db = _db;
+        }
+        public Event GetById(Guid id)
         {
             return db.Events.First(x => x.Id == id);
         }
-        public Event GetByName(string name, Context db)
+        public Event GetByName(string name)
         {
             return db.Events.First(x => x.Name == name);
         }
-        public async Task CreateAsync(Event entity, Context db)
+        public async Task CreateAsync(Event entity)
         {
             await db.Events.AddAsync(entity);
-            await db.SaveChangesAsync();
         }
-        public async Task UpdateAsync(Event entity, Context db)
+        public Task Update(Event entity)
         {
             db.Events.Update(entity);
-            await db.SaveChangesAsync();
-        }
-        public Task DeleteAsync(Event entity, Context db)
-        {
-            db.Remove(entity);
-
             return Task.CompletedTask;
         }
-        public async Task SaveAsync(Event entity, Context db)
+        public Task Delete(Event entity)
+        {
+            db.Events.Remove(entity);
+            return Task.CompletedTask;
+        }
+        public async Task SaveAsync()
         {
             await db.SaveChangesAsync();
         }

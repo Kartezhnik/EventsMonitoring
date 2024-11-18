@@ -1,4 +1,5 @@
-﻿using Common.Models.Entities;
+﻿using Application.Validators;
+using Domain.Entities;
 using Microsoft.IdentityModel.SecurityTokenService;
 
 
@@ -6,19 +7,31 @@ namespace Application.UseCases
 {
     public class UploadImageUseCase
     {
+        ImageValidator imageValidator;
+        public UploadImageUseCase(ImageValidator _imageValidator)
+        {
+            imageValidator = _imageValidator;
+        }
         public static async Task UploadImageAsync(Event @event)
         {
-            if (@event.ImageFile == null || @event.ImageFile.Length == 0)
-                throw new BadRequestException("Изображение не загружено");
-
             var uploadsDirectory = Path.Combine("uploads");
+
+            ImageValidator imageValidator = new ImageValidator();
+            imageValidator.ValidateImage(@event.ImageFile);
 
             var fileName = $"{Guid.NewGuid()}_{@event.ImageFile.FileName}";
             var filePath = Path.Combine(uploadsDirectory, fileName);
 
-            using (var stream = new FileStream(filePath, FileMode.Create))
+            try
             {
-                await @event.ImageFile.CopyToAsync(stream);
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await @event.ImageFile.CopyToAsync(stream);
+                }
+            }
+            catch (ValidationException ex)
+            {
+                new BadRequestException(ex.Message);
             }
         }
     }

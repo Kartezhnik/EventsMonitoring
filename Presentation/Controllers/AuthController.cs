@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
 using Common;
-using Common.Models.Entities;
 using Application.Services;
 using Application.UseCases;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Common.Entities;
 
 namespace Presentation.Controllers
 {
