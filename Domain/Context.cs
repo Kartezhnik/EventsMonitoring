@@ -1,6 +1,7 @@
 ﻿using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using System;  // Добавьте это пространство имен
 
 namespace Domain
 {
@@ -8,9 +9,11 @@ namespace Domain
     {
         private readonly IConfiguration configuration;
 
-        public Context(DbContextOptions<Context> options, IConfiguration _configuration) : base(options)
+        // Конструктор, принимающий IConfiguration
+        public Context(DbContextOptions<Context> options, IConfiguration configuration)
+            : base(options)
         {
-            configuration = _configuration;
+            this.configuration = configuration;  // Инициализация поля
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -19,16 +22,16 @@ namespace Domain
             {
                 var connectionString = configuration.GetConnectionString("DefaultConnection");
                 optionsBuilder.UseSqlServer(connectionString);
-                Console.WriteLine($"Connection String: {connectionString}");
+                Console.WriteLine($"Connection String: {connectionString}");  // Теперь работает Console
             }
         }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasOne(u => u.Event).WithMany(e => e.Users).HasForeignKey(u => u.EventInfoKey);
+            modelBuilder.Entity<User>().HasOne(u => u.Event).WithMany(e => e.Users).HasForeignKey(u => u.EventInfoKey).OnDelete(DeleteBehavior.SetNull);
         }
 
         public DbSet<Event> Events { get; set; } = null!;
         public DbSet<User> Users { get; set; } = null!;
     }
 }
-
