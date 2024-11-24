@@ -15,7 +15,8 @@ namespace Presentation.Controllers
         CreateEventUseCase createEventUseCase;
         IMapper mapper;
         Context context;
-        
+
+
         public EventController(Context _context, IMapper _mapper, EventRepositoryUseCase _eventRepositoryUseCase)
         {
             context = _context;

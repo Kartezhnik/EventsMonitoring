@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Domain;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
 {
@@ -6,6 +7,8 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrasructure(this IServiceCollection services)
         {
+            services.AddScoped<Context>();
+
             return services;
         }
     }

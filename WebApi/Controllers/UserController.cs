@@ -13,13 +13,11 @@ namespace Presentation.Controllers
     {
         IMapper mapper;
         UserRepositoryUseCase userRepositoryUseCase;
-        Context context;
 
-        public UserController(IMapper _mapper, UserRepositoryUseCase _userRepositoryUseCase, Context _context)
+        public UserController(IMapper _mapper, UserRepositoryUseCase _userRepositoryUseCase)
         {
             mapper = _mapper;
             userRepositoryUseCase = _userRepositoryUseCase;
-            context = _context;
         }
 
         [Authorize]

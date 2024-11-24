@@ -7,15 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="EntityFramework" Version="6.5.1" />
     <PackageReference Include="FluentNHibernate" Version="3.4.0" />
     <PackageReference Include="FluentValidation" Version="11.10.0" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.10.0" />
     <PackageReference Include="Google.Api.CommonProtos" Version="2.16.0" />
     <PackageReference Include="MediatR" Version="12.4.1" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
-    <PackageReference Include="Microsoft.IdentityModel" Version="7.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.14" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.14">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel" Version="6.0.0" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.0" />
   </ItemGroup>
 

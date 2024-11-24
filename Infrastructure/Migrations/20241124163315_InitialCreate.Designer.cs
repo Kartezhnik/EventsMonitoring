@@ -9,21 +9,20 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace WebApi.Migrations
+namespace Infrastructure.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20241118043259_InitialCreate")]
+    [Migration("20241124163315_InitialCreate")]
     partial class InitialCreate
     {
-        /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "7.0.0")
+                .HasAnnotation("ProductVersion", "6.0.14")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
             modelBuilder.Entity("Domain.Entities.Event", b =>
                 {
@@ -92,7 +91,8 @@ namespace WebApi.Migrations
                 {
                     b.HasOne("Domain.Entities.Event", "Event")
                         .WithMany("Users")
-                        .HasForeignKey("EventInfoKey");
+                        .HasForeignKey("EventInfoKey")
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Event");
                 });

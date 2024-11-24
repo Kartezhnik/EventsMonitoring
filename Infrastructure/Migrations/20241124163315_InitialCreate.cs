@@ -3,12 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace WebApi.Migrations
+namespace Infrastructure.Migrations
 {
-    /// <inheritdoc />
     public partial class InitialCreate : Migration
     {
-        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
@@ -46,7 +44,8 @@ namespace WebApi.Migrations
                         name: "FK_Users_Events_EventInfoKey",
                         column: x => x.EventInfoKey,
                         principalTable: "Events",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateIndex(
@@ -55,7 +54,6 @@ namespace WebApi.Migrations
                 column: "EventInfoKey");
         }
 
-        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(

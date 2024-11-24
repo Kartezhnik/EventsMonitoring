@@ -17,7 +17,6 @@ namespace Application
             services.AddValidatorsFromAssembly(assembly);
 
             services.AddScoped<IAuthService, AuthService>();
-            services.AddScoped<Context>();
 
             return services;
         }
