@@ -22,11 +22,19 @@ namespace EventsMonitoring
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
+            builder.Services.AddLogging(logging =>
+            {
+                logging.AddConsole();
+                logging.SetMinimumLevel(LogLevel.Debug); 
+            });
+
             builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables();
+                .AddEnvironmentVariables(); 
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+            Console.WriteLine($"Connection String: {connectionString}");
 
             builder.Services.AddDbContext<Context>(options =>
             {
@@ -49,8 +57,6 @@ namespace EventsMonitoring
             builder.Services.AddScoped<ITokenService, TokenService>();
             builder.Services.AddScoped<UserRegistrationUseCase>();
             builder.Services.AddScoped<IAuthService, AuthService>();
-
-            Console.WriteLine($"Connection String: {connectionString}");
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
